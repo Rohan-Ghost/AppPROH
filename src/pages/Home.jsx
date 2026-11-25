@@ -1,233 +1,197 @@
 import React, { useState } from 'react'
-import AppGenerator from '../components/AppGenerator'
-import CompletionCard from '../components/CompletionCard'
-import CodePreview from '../components/CodePreview'
-import { Sparkles, Code, Layers, Zap, Cpu, ArrowRight, Shield, Rocket } from 'lucide-react'
+import { Zap, Users, Server, Shield, CreditCard, Clock, BarChart2, Mic, Laptop } from 'lucide-react'
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState('app-builder') // app-builder | autocomplete | codegen
-  const [codePrompt, setCodePrompt] = useState('')
-  const [generatedResult, setGeneratedResult] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [section, setSection] = useState('dashboard') // dashboard | metrics | settings
 
-  const sampleSuggestions = [
-    {
-      title: 'Context Processor Autocomplete',
-      model: 'Claude-3.5-Sonnet',
-      latency: '112ms',
-      description: 'Emergent-style predicting vector context embedding lookup for active editor block.',
-      tokens: '240 in / 110 out',
-      code: `// Emergent.io Context Autocomplete Engine
-export async function processContextAndAutocomplete(userCode, cursorOffset) {
-  const embedding = await generateVectorEmbedding(userCode.slice(0, cursorOffset));
-  const retrievedDocs = await vectorStore.query({ vector: embedding, topK: 5 });
-  return await llmRouter.complete({
-    prompt: formatPromptWithDocs(userCode, retrievedDocs),
-    temperature: 0.2
-  });
-}`
-    },
-    {
-      title: 'Zappora SaaS Stripe Webhook Handler',
-      model: 'GPT-4o',
-      latency: '204ms',
-      description: 'Zappora subscription billing and webhook sync.',
-      tokens: '310 in / 180 out',
-      code: `// Zappora Billing & Webhook Workflow
-export async function handleStripeWebhook(event) {
-  switch(event.type) {
-    case 'customer.subscription.created':
-      await db.users.updateSubscriptionTier(event.data.object.customer, 'PRO');
-      break;
-    case 'invoice.payment_failed':
-      await sendPaymentRetryNotification(event.data.object.customer);
-      break;
-  }
-}`
-    }
+  const platforms = [
+    { name: 'Lovable', color: 'zappora', icon: Laptop },
+    { name: 'Zappora', color: 'zapporaLight', icon: CreditCard },
+    { name: 'Stripe', color: 'zappora', icon: Shield },
   ]
 
-  const handleCodeGen = (e) => {
-    e.preventDefault()
-    if (!codePrompt.trim()) return
-
-    setLoading(true)
-    setTimeout(() => {
-      setGeneratedResult(`// AppPROH AI Code Generation Result
-// Prompt: ${codePrompt}
-
-//import React, { useState, useEffect } from 'react';
-//import { Card, Button, Badge } from '@/components/ui';
-
-//export function GeneratedFeature() {
-//  const [data, setData] = useState([]);
-
-//  useEffect(() => {
-//    // Fetch data from AppPROH backend
-//    fetch('/api/v1/analytics')
-//      .then(res => res.json())
-//      .then(d => setData(d));
-//  }, []);
-
-//  return (
-//    <div className="p-4 bg-slate-900 border border-slate-800 rounded-lg">
-//      <h3 className="text-lg font-bold text-white mb-2">Generated Feature</h3>
-//      <p className="text-sm text-slate-400">Integrated Emergent RAG + Lovable Live Preview</p>
-//    </div>
-//  );
-}`)
-      setLoading(false)
-    }, 1200)
-  }
+  const handleSection = (s) => setSection(s)
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Hero section with brand integration - Zappora themed */}
-      <div className="text-center space-y-4 max-w-3xl mx-auto">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-zapporaDark/60 border border-zapporaLight text-zapporaLight text-xs font-medium">
-          <Zap className="w-3.5 h-3.5 text-zappora" />
-          <span>Unified Full-Stack AI Platform Architecture</span>
-        </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-white">
-          AppPROH{' '}
-          <span className="text-zappora-gradient">Studio</span>
-        </h1>
-        <p className="text-slate-400 text-base sm:text-lg">
-          Combining the best of <span className="text-zappora font-semibold">Lovable.dev</span> (Live App Builder), <span className="text-zappora font-semibold">Emergent.io</span> (IDE Autocomplete & RAG), and <span className="text-zappora font-semibold">Zappora</span> (SaaS Billing & Auth).
-        </p>
+    <div className="min-h-screen bg-zapporaDark text-zapporaLight flex flex-col items-center justify-center p-8">
+      {/* Navigation */}
+      <div className="flex gap-6 mb-12">
+        {platforms.map((p) => (
+          <button
+            key={p.name}
+            onClick={() => handleSection(p.name)}
+            className={`px-6 py-3 rounded-full border border-zapporaLight/30 text-zappora text-sm font-medium transition-all hover:border-zappora hover:text-zapporaDark ${section === p.name ? 'border-zappora text-zapporaDark bg-zapporaLight/20' : ''}`}
+          >
+            {p.name}
+          </button>
+        ))}
       </div>
 
-      {/* Mode switcher tabs */}
-      <div className="flex justify-center">
-        <div className="bg-slate-900 p-1.5 rounded-xl border border-slate-800 flex space-x-2 max-w-xl w-full">
-          <button
-            onClick={() => setActiveTab('app-builder')}
-            className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all flex items-center justify-center space-x-2 ${
-              activeTab === 'app-builder'
-                ? 'bg-zapporaLight text-[#0d0d0d] shadow-lg'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
-          >
-            <Layers className="w-4 h-4 text-zappora" />
-            <span>App Builder (Lovable)</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('autocomplete')}
-            className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all flex items-center justify-center space-x-2 ${
-              activeTab === 'autocomplete'
-                ? 'bg-zapporaLight text-[#0d0d0d] shadow-lg'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
-          >
-            <Cpu className="w-4 h-4 text-zappora" />
-            <span>Autocomplete (Emergent)</span>
-          </button>
-          <button
-            onClick={() => setActiveTab('codegen')}
-            className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all flex items-center justify-center space-x-2 ${
-              activeTab === 'codegen'
-                ? 'bg-zapporaLight text-[#0d0d0d] shadow-lg'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
-            }`}
-          >
-            <Code className="w-4 h-4 text-zappora" />
-            <span>Code Gen & RAG</span>
-          </button>
-        </div>
-      </div>
+      {/* Dashboard section */}
+      {section === 'dashboard' && (
+        <div className="bg-zapporaDark/50 rounded-2xl p-8 w-full max-w-4xl">
+          <h1 className="text-3xl font-bold text-zappora mb-6">AppPROH</h1>
+          <p className="text-zapporaLight/80 text-base mb-8">
+            Zappora SaaS Platform • Real-time analytics & billing
+          </p>
 
-      {/* Active Tab Content */}
-      {activeTab === 'app-builder' && (
-        <div className="space-y-6">
-          <AppGenerator />
-        </div>
-      )}
+          {/* Key metrics */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <div className="flex items-center space-x-3 mb-3">
+                <Zap className="w-5 h-5 text-zappora" />
+                <div>
+                  <div className="text-zapporaLight">14,290</div>
+                  <div className="text-xs text-zapporaLight/60">Insights (ILU)</div>
+                </div>
+              </div>
+              <div className="text-zapporaLight/60 text-xs">vs last week</div>
+            </div>
 
-      {activeTab === 'autocomplete' && (
-        <div className="space-y-6">
-          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
-            <h3 className="text-xl font-bold text-white mb-2 flex items-center space-x-2">
-              <Cpu className="w-5 h-5 text-zappora" />
-              <span>Emergent-Style Autocomplete & RAG Router</span>
-            </h3>
-            <p className="text-sm text-slate-400 mb-4">
-              Real-time token completion pipeline with pgvector semantic similarity search.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {sampleSuggestions.map((s, idx) => (
-                <CompletionCard key={idx} suggestion={s} />
-              ))}
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <div className="flex items-center space-x-3 mb-3">
+                <Server className="w-5 h-5 text-zappora" />
+                <div>
+                  <div className="text-zapporaLight">128ms</div>
+                  <div className="text-xs text-zapporaLight/60">Avg Latency</div>
+                </div>
+              </div>
+              <div className="text-zapporaLight/60 text-xs">-12.3% vs prior</div>
+            </div>
+
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <div className="flex items-center space-x-3 mb-3">
+                <Clock className="w-5 h-5 text-zappora" />
+                <div>
+                  <div className="text-zapporaLight">1.42M</div>
+                  <div className="text-xs text-zapporaLight/60">Token Usage</div>
+                </div>
+              </div>
+              <div className="text-zapporaLight/60 text-xs">+24.1% vs prior</div>
+            </div>
+          </div>
+
+          {/* Recent activity */}
+          <div className="mt-8 pt-8 border-t border-zapporaLight/30">
+            <h2 className="text-zapporaLight text-xl font-bold mb-4">Recent Activity</h2>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3 py-2 border-b border-zapporaLight/30 last:border-0">
+                <Zap className="w-4 h-4 text-zappora" />
+                <div className="flex-1">
+                  <div className="font-medium">Vector query completed</div>
+                  <div className="text-zapporaLight/60 text-sm">10:40 AM</div>
+                </div>
+                <div className="text-zapporaLight/60 text-xs">200 OK</div>
+              </div>
+              <div className="flex items-center space-x-3 py-2 border-b border-zapporaLight/30 last:border-0">
+                <Users className="w-4 h-4 text-zappora" />
+                <div className="flex-1">
+                  <div className="font-medium">Code generated</div>
+                  <div className="text-zapporaLight/60 text-sm">10:38 AM</div>
+                </div>
+                <div className="text-zapporaLight/60 text-xs">200 OK</div>
+              </div>
+              <div className="flex items-center space-x-3 py-2 border-b border-zapporaLight/30 last:border-0">
+                <CreditCard className="w-4 h-4 text-zappora" />
+                <div className="flex-1">
+                  <div className="font-medium">Subscription synced</div>
+                  <div className="text-zapporaLight/60 text-sm">10:35 AM</div>
+                </div>
+                <div className="text-zapporaLight/60 text-xs">200 OK</div>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      {activeTab === 'codegen' && (
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6">
-          <div>
-            <h3 className="text-xl font-bold text-white mb-2 flex items-center space-x-2">
-              <Code className="w-5 h-5 text-zappora" />
-              <span>Multi-Model AI Code Generation</span>
-            </h3>
-            <p className="text-sm text-slate-400">
-              Generate full stack components or logic functions using optimal LLM routing.
-            </p>
+      {/* Metrics overview */}
+      {section === 'metrics' && (
+        <div className="bg-zapporaDark/50 rounded-2xl p-8 w-full max-w-4xl">
+          <h2 className="text-zapporaLight text-xl font-bold mb-6">Platform Metrics</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <div className="flex items-center space-x-3 mb-3">
+                <BarChart2 className="w-5 h-5 text-zappora" />
+                <div>
+                  <div className="text-zapporaLight">14.3K</div>
+                  <div className="text-xs text-zapporaLight/60">Insights</div>
+                </div>
+              </div>
+              <div className="text-zapporaLight/60 text-xs">+18.4% this month</div>
+            </div>
+
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <div className="flex items-center space-x-3 mb-3">
+                <Zap className="w-5 h-5 text-zapporaLight" />
+                <div>
+                  <div className="text-zapporaLight">128ms</div>
+                  <div className="text-xs text-zapporaLight/60">Latency</div>
+                </div>
+              </div>
+              <div className="text-zapporaLight/60 text-xs">-12.3% this month</div>
+            </div>
+
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <div className="flex items-center space-x-3 mb-3">
+                <Cpu className="w-5 h-5 text-zapporaLight" />
+                <div>
+                  <div className="text-zapporaLight">1.42M</div>
+                  <div className="text-xs text-zapporaLight/60">Tokens</div>
+                </div>
+              </div>
+              <div className="text-zapporaLight/60 text-xs">+24.1% this month</div>
+            </div>
           </div>
-
-          <form onSubmit={handleCodeGen} className="space-y-4">
-            <input
-              type="text"
-              value={codePrompt}
-              onChange={(e) => setCodePrompt(e.target.value)}
-              placeholder="e.g. Write a TypeScript middleware for JWT authentication with rate limiting..."
-              className="w-full bg-slate-950 border border-zapporaLight rounded-xl p-4 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-zappora text-sm"
-            />
-            <button
-              type="submit"
-              disabled={!codePrompt.trim() || loading}
-              className="px-6 py-3 bg-gradient-to-r from-zapporaLight via-zappora to-zapporaDark hover:from-zapporaDark hover:to-zappora text-white font-semibold rounded-xl shadow-lg transition-all text-sm disabled:opacity-50"
-            >
-              {loading ? 'Generating...' : 'Generate Code Snippet'}
-            </button>
-          </form>
-
-          {generatedResult && (
-            <CodePreview title="Generated Output" code={generatedResult} language="typescript" />
-          )}
         </div>
       )}
 
-      {/* Highlights / Features grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-800">
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
-          <div className="w-8 h-8 rounded-lg bg-zapporaDark text-zappora flex items-center justify-center border border-zapporaLight">
-            <Rocket className="w-4 h-4" />
-          </div>
-          <h4 className="font-bold text-white">Lovable Preview Engine</h4>
-          <p className="text-xs text-slate-400">
-            Sub-2-second preview feedback loop with instant hot-reloading component canvas.
-          </p>
-        </div>
+      {/* Settings section */}
+      {section === 'settings' && (
+        <div className="bg-zapporaDark/50 rounded-2xl p-8 w-full max-w-4xl">
+          <h2 className="text-zapporaLight text-xl font-bold mb-6">Platform Settings</h2>
 
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
-          <div className="w-8 h-8 rounded-lg bg-zapporaDark text-zappora flex items-center justify-center border border-zapporaLight">
-            <Cpu className="w-4 h-4" />
-          </div>
-          <h4 className="font-bold text-white">Emergent Autocomplete</h4>
-          <p className="text-xs text-slate-400">
-            pgvector RAG pipeline, context window management, and multi-model routing (GPT-4o / Claude 3.5).
-          </p>
-        </div>
+          <div className="grid grid-cols-1 gap-4 mb-6">
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <h3 className="text-zapporaLight font-medium mb-3">Model Routing</h3>
+              <p className="text-zapporaLight/60 text-sm">
+                Primary: Claude 3.5 Sonnet • Fallback: GPT-4o
+              </p>
+            </div>
 
-        <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
-          <div className="w-8 h-8 rounded-lg bg-zapporaLight text-zapporaDark flex items-center justify-center border border-zapporaLight">
-            <Shield className="w-4 h-4" />
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <h3 className="text-zapporaLight font-medium mb-3">API Keys</h3>
+              <p className="text-zapporaLight/60 text-sm">
+                Zappora SaaS keys configured and active
+              </p>
+            </div>
           </div>
-          <h4 className="font-bold text-white">Zappora SaaS Stack</h4>
-          <p className="text-xs text-slate-400">
-            Enterprise subscription tiers, Stripe payment webhooks, team auth, and ILU metrics tracking.
-          </p>
+
+          <div className="grid grid-cols-1 gap-4">
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <h3 className="text-zapporaLight font-medium mb-3">Subscription</h3>
+              <p className="text-zapporaLight/60 text-sm">
+                Pro Enterprise • Renews Dec 18 • $149/mo
+              </p>
+            </div>
+
+            <div className="bg-zapporaDark/30 rounded-xl p-6 border border-zapporaLight/30">
+              <h3 className="text-zapporaLight font-medium mb-3">Notifications</h3>
+              <p className="text-zapporaLight/60 text-sm">
+                Email • In-app • Slack webhook
+              </p>
+            </div>
+          </div>
         </div>
+      )}
+
+      {/* CTA at bottom */}
+      <div className="mt-12 text-center">
+        <button className="px-8 py-3 bg-gradient-to-r from-zapporaLight via-zappora to-zapporaDark text-white font-bold rounded-xl shadow-lg hover:from-zapporaDark hover:to-zappora transition-all">
+          Start Free Trial
+        </button>
+        <p className="mt-4 text-zapporaLight/60 text-sm">
+          Join 2,487+ teams building with AppPROH
+        </p>
       </div>
     </div>
   )
