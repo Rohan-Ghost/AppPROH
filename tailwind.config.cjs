@@ -8,16 +8,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        lovable: '#28a745',
-        emergent: '#6f42c1',
         zappora: '#fd7e14',
-        appproh: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
+        zapporaLight: '#ffa39e',
+        zapporaDark: '#c4532a',
+        saas: {
+          50: '#fffbff',
+          100: '#f7f0fa',
+          500: '#a855f7',
+          600: '#9a4cff',
+        },
+        gradient: {
+          zappora: 'linear-gradient(135deg, #fd7e14, #ffa39e)',
+          saas: 'linear-gradient(135deg, #fd7e14, #c4532a)',
         }
+      },
+      fontFamily: {
+        sans: ['System', 'sans-serif'],
       }
     },
   },

@@ -1,8 +1,122 @@
+/* AppPROH Frontend - Zappora-styled Theme
+   Primary branding: Zappora Orange (#fd7e14)
+   Dark mode with saas gradient accents
+*/
+
+/* Base resets and body */
 @tailwind base;
+
+/* Component layers */
 @tailwind components;
+
+/* Utility classes */
 @tailwind utilities;
 
+/* Custom Zappora-themed base styles */
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: #0d0d0d;
+  color: #f0f0f0;
+}
+
+/* Zappora gradient accent for text */
+.text-zappora-gradient {
+  background: linear-gradient(135deg, #fd7e14, #ffa39e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Zappora card styling */
+.zappora-card {
+  background: rgba(253, 126, 20, 0.1);
+  border: 1px solid rgba(253, 126, 20, 0.3);
+}
+
+/* Navigation link active state */
+.nav-active {
+  background: linear-gradient(135deg, #fd7e14, #ffa39e);
+  color: #0d0d0d;
+}
+
+/* Button gradients */
+.btn-zappora-primary {
+  background: linear-gradient(135deg, #fd7e14, #ffa39e);
+  color: #0d0d0d;
+}
+
+.btn-zappora-primary:hover {
+  background: linear-gradient(135deg, #ffa39e, #fd7e14);
+}
+
+/* Metric tile styling */
+.metric-tile {
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  border: 1px solid rgba(253, 126, 20, 0.2);
+}
+
+/* Dashboard chart gradient */
+.chart-gradient {
+  background: linear-gradient(135deg, #fd7e14, #c4532a);
+}
+
+/* Form input styling */
+.input-zappora {
+  background: rgba(253, 126, 20, 0.05);
+  border: 1px solid rgba(253, 126, 20, 0.3);
+  color: #f0f0f0;
+}
+
+.input-zappora:focus {
+  background: rgba(253, 126, 20, 0.1);
+  border-color: #fd7e14;
+  outline: none;
+}
+
+/* Table row hover */
+.table-row-hover:hover {
+  background: rgba(253, 126, 20, 0.05);
+}
+
+/* Badge styling */
+.badge-zappora {
+  background: rgba(253, 126, 20, 0.2);
+  color: #fd7e14;
+}
+
+/* Sidebar active item */
+.sidebar-active {
+  background: rgba(253, 126, 20, 0.15);
+  border-left: 3px solid #fd7e14;
+}
+
+/* Progress bar */
+.progress-bar-zappora {
+  background: linear-gradient(90deg, #fd7e14, #ffa39e);
+}
+
+/* Status indicators */
+.status-active {
+  color: #fd7e14;
+}
+
+.status-warning {
+  color: #ffa39e;
+}
+
+.status-offline {
+  color: #6b7280;
+}
+
+/* Loading spinner */
+.spinner-zappora {
+  border-top-color: #fd7e14;
+  border-left-color: #fd7e14;
+}
+
+/* Footer */
+.footer-zappora {
+  background: rgba(253, 126, 20, 0.05);
+  border-top: 1px solid rgba(253, 126, 20, 0.2);
 }

@@ -56,25 +56,25 @@ export async function handleStripeWebhook(event) {
       setGeneratedResult(`// AppPROH AI Code Generation Result
 // Prompt: ${codePrompt}
 
-import React, { useState, useEffect } from 'react';
-import { Card, Button, Badge } from '@/components/ui';
+//import React, { useState, useEffect } from 'react';
+//import { Card, Button, Badge } from '@/components/ui';
 
-export function GeneratedFeature() {
-  const [data, setData] = useState([]);
+//export function GeneratedFeature() {
+//  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    // Fetch data from AppPROH backend
-    fetch('/api/v1/analytics')
-      .then(res => res.json())
-      .then(d => setData(d));
-  }, []);
+//  useEffect(() => {
+//    // Fetch data from AppPROH backend
+//    fetch('/api/v1/analytics')
+//      .then(res => res.json())
+//      .then(d => setData(d));
+//  }, []);
 
-  return (
-    <div className="p-4 bg-slate-900 border border-slate-800 rounded-lg">
-      <h3 className="text-lg font-bold text-white mb-2">Generated Feature</h3>
-      <p className="text-sm text-slate-400">Integrated Emergent RAG + Lovable Live Preview</p>
-    </div>
-  );
+//  return (
+//    <div className="p-4 bg-slate-900 border border-slate-800 rounded-lg">
+//      <h3 className="text-lg font-bold text-white mb-2">Generated Feature</h3>
+//      <p className="text-sm text-slate-400">Integrated Emergent RAG + Lovable Live Preview</p>
+//    </div>
+//  );
 }`)
       setLoading(false)
     }, 1200)
@@ -82,22 +82,18 @@ export function GeneratedFeature() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Hero section with brand integration */}
+      {/* Hero section with brand integration - Zappora themed */}
       <div className="text-center space-y-4 max-w-3xl mx-auto">
-        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-purple-950/60 border border-purple-800 text-purple-300 text-xs font-medium">
-          <Sparkles className="w-3.5 h-3.5 text-green-400" />
+        <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-zapporaDark/60 border border-zapporaLight text-zapporaLight text-xs font-medium">
+          <Zap className="w-3.5 h-3.5 text-zappora" />
           <span>Unified Full-Stack AI Platform Architecture</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-white">
           AppPROH{' '}
-          <span className="bg-gradient-to-r from-[#28a745] via-[#6f42c1] to-[#fd7e14] bg-clip-text text-transparent">
-            Studio
-          </span>
+          <span className="text-zappora-gradient">Studio</span>
         </h1>
         <p className="text-slate-400 text-base sm:text-lg">
-          Combining the best of <span className="text-[#28a745] font-semibold">Lovable.dev</span> (Live App Builder),{' '}
-          <span className="text-[#6f42c1] font-semibold">Emergent.io</span> (IDE Autocomplete & RAG), and{' '}
-          <span className="text-[#fd7e14] font-semibold">Zappora</span> (SaaS Billing & Auth).
+          Combining the best of <span className="text-zappora font-semibold">Lovable.dev</span> (Live App Builder), <span className="text-zappora font-semibold">Emergent.io</span> (IDE Autocomplete & RAG), and <span className="text-zappora font-semibold">Zappora</span> (SaaS Billing & Auth).
         </p>
       </div>
 
@@ -108,33 +104,33 @@ export function GeneratedFeature() {
             onClick={() => setActiveTab('app-builder')}
             className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all flex items-center justify-center space-x-2 ${
               activeTab === 'app-builder'
-                ? 'bg-green-600 text-white shadow-lg'
+                ? 'bg-zapporaLight text-[#0d0d0d] shadow-lg'
                 : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
             }`}
           >
-            <Layers className="w-4 h-4" />
+            <Layers className="w-4 h-4 text-zappora" />
             <span>App Builder (Lovable)</span>
           </button>
           <button
             onClick={() => setActiveTab('autocomplete')}
             className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all flex items-center justify-center space-x-2 ${
               activeTab === 'autocomplete'
-                ? 'bg-purple-600 text-white shadow-lg'
+                ? 'bg-zapporaLight text-[#0d0d0d] shadow-lg'
                 : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
             }`}
           >
-            <Cpu className="w-4 h-4" />
+            <Cpu className="w-4 h-4 text-zappora" />
             <span>Autocomplete (Emergent)</span>
           </button>
           <button
             onClick={() => setActiveTab('codegen')}
             className={`flex-1 py-2.5 px-4 rounded-lg text-sm font-semibold transition-all flex items-center justify-center space-x-2 ${
               activeTab === 'codegen'
-                ? 'bg-orange-600 text-white shadow-lg'
+                ? 'bg-zapporaLight text-[#0d0d0d] shadow-lg'
                 : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
             }`}
           >
-            <Code className="w-4 h-4" />
+            <Code className="w-4 h-4 text-zappora" />
             <span>Code Gen & RAG</span>
           </button>
         </div>
@@ -151,7 +147,7 @@ export function GeneratedFeature() {
         <div className="space-y-6">
           <div className="bg-slate-900 border border-slate-800 rounded-xl p-6">
             <h3 className="text-xl font-bold text-white mb-2 flex items-center space-x-2">
-              <Cpu className="w-5 h-5 text-purple-400" />
+              <Cpu className="w-5 h-5 text-zappora" />
               <span>Emergent-Style Autocomplete & RAG Router</span>
             </h3>
             <p className="text-sm text-slate-400 mb-4">
@@ -170,7 +166,7 @@ export function GeneratedFeature() {
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6">
           <div>
             <h3 className="text-xl font-bold text-white mb-2 flex items-center space-x-2">
-              <Code className="w-5 h-5 text-orange-400" />
+              <Code className="w-5 h-5 text-zappora" />
               <span>Multi-Model AI Code Generation</span>
             </h3>
             <p className="text-sm text-slate-400">
@@ -184,12 +180,12 @@ export function GeneratedFeature() {
               value={codePrompt}
               onChange={(e) => setCodePrompt(e.target.value)}
               placeholder="e.g. Write a TypeScript middleware for JWT authentication with rate limiting..."
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-orange-500 text-sm"
+              className="w-full bg-slate-950 border border-zapporaLight rounded-xl p-4 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-zappora text-sm"
             />
             <button
               type="submit"
               disabled={!codePrompt.trim() || loading}
-              className="px-6 py-3 bg-gradient-to-r from-orange-600 to-purple-600 hover:from-orange-500 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg transition-all text-sm disabled:opacity-50"
+              className="px-6 py-3 bg-gradient-to-r from-zapporaLight via-zappora to-zapporaDark hover:from-zapporaDark hover:to-zappora text-white font-semibold rounded-xl shadow-lg transition-all text-sm disabled:opacity-50"
             >
               {loading ? 'Generating...' : 'Generate Code Snippet'}
             </button>
@@ -204,7 +200,7 @@ export function GeneratedFeature() {
       {/* Highlights / Features grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-slate-800">
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
-          <div className="w-8 h-8 rounded-lg bg-green-950 text-green-400 flex items-center justify-center border border-green-800">
+          <div className="w-8 h-8 rounded-lg bg-zapporaDark text-zappora flex items-center justify-center border border-zapporaLight">
             <Rocket className="w-4 h-4" />
           </div>
           <h4 className="font-bold text-white">Lovable Preview Engine</h4>
@@ -214,7 +210,7 @@ export function GeneratedFeature() {
         </div>
 
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
-          <div className="w-8 h-8 rounded-lg bg-purple-950 text-purple-400 flex items-center justify-center border border-purple-800">
+          <div className="w-8 h-8 rounded-lg bg-zapporaDark text-zappora flex items-center justify-center border border-zapporaLight">
             <Cpu className="w-4 h-4" />
           </div>
           <h4 className="font-bold text-white">Emergent Autocomplete</h4>
@@ -224,7 +220,7 @@ export function GeneratedFeature() {
         </div>
 
         <div className="bg-slate-900/60 p-5 rounded-xl border border-slate-800 space-y-2">
-          <div className="w-8 h-8 rounded-lg bg-orange-950 text-orange-400 flex items-center justify-center border border-orange-800">
+          <div className="w-8 h-8 rounded-lg bg-zapporaLight text-zapporaDark flex items-center justify-center border border-zapporaLight">
             <Shield className="w-4 h-4" />
           </div>
           <h4 className="font-bold text-white">Zappora SaaS Stack</h4>

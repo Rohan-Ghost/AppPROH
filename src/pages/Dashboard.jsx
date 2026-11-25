@@ -3,10 +3,10 @@ import { Activity, Zap, Cpu, Users, CreditCard, BarChart2, TrendingUp, Clock, Se
 
 export default function Dashboard() {
   const metrics = [
-    { title: 'Insights (ILU)', value: '14,290', change: '+18.4%', icon: Activity, color: 'text-purple-400' },
-    { title: 'Avg Latency (L)', value: '128ms', change: '-12.3%', icon: Zap, color: 'text-green-400' },
-    { title: 'Token Usage (U)', value: '1.42M', change: '+24.1%', icon: Cpu, color: 'text-orange-400' },
-    { title: 'Active Subscriptions', value: '482', change: '+8.2%', icon: CreditCard, color: 'text-blue-400' },
+    { title: 'Insights (ILU)', value: '14,290', change: '+18.4%', icon: Activity, color: 'text-zappora' },
+    { title: 'Avg Latency (L)', value: '128ms', change: '-12.3%', icon: Zap, color: 'text-zapporaLight' },
+    { title: 'Token Usage (U)', value: '1.42M', change: '+24.1%', icon: Cpu, color: 'text-zapporaLight' },
+    { title: 'Active Subscriptions', value: '482', change: '+8.2%', icon: CreditCard, color: 'text-zappora' },
   ]
 
   const recentLogs = [
@@ -21,7 +21,7 @@ export default function Dashboard() {
       <div>
         <h1 className="text-3xl font-extrabold text-white flex items-center space-x-3">
           <span>AppPROH SaaS Analytics</span>
-          <span className="text-xs px-2.5 py-1 rounded-full bg-orange-950 text-orange-400 border border-orange-800 font-mono">
+          <span className="text-xs px-2.5 py-1 rounded-full bg-zapporaDark text-zapporaLight border border-zapporaLight font-mono">
             ILU Framework
           </span>
         </h1>
@@ -55,7 +55,7 @@ export default function Dashboard() {
         <div className="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="font-bold text-white flex items-center space-x-2">
-              <BarChart2 className="w-5 h-5 text-purple-400" />
+              <BarChart2 className="w-5 h-5 text-zappora" />
               <span>Real-Time Latency & Token Flow (p95 / p99)</span>
             </h3>
             <span className="text-xs font-mono text-slate-400">Live Stream</span>
@@ -67,16 +67,16 @@ export default function Dashboard() {
                 <div key={i} className="flex-1 flex flex-col items-center space-y-1 group">
                   <div
                     style={{ height: `${val}%` }}
-                    className="w-full bg-gradient-to-t from-purple-600 via-green-500 to-orange-500 rounded-t transition-all group-hover:opacity-80"
+                    className="w-full bg-gradient-to-t from-zapporaLight via-zappora to-zapporaDark rounded-t transition-all group-hover:opacity-80"
                   />
                   <span className="text-[9px] font-mono text-slate-500">{i + 1}h</span>
                 </div>
               ))}
             </div>
             <div className="flex justify-between text-xs text-slate-500 border-t border-slate-800 pt-2 font-mono">
-              <span className="text-purple-400">Emergent: ~110ms</span>
-              <span className="text-green-400">Lovable: ~1.8s</span>
-              <span className="text-orange-400">Zappora: ~220ms</span>
+              <span className="text-zapporaLight">Emergent: ~110ms</span>
+              <span className="text-zapporaLight">Lovable: ~1.8s</span>
+              <span className="text-zappora">Zappora: ~220ms</span>
             </div>
           </div>
         </div>
@@ -84,17 +84,17 @@ export default function Dashboard() {
         {/* Server status & infrastructure */}
         <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl space-y-4">
           <h3 className="font-bold text-white flex items-center space-x-2">
-            <Server className="w-5 h-5 text-green-400" />
+            <Server className="w-5 h-5 text-zappora" />
             <span>Infrastructure Health</span>
           </h3>
 
           <div className="space-y-3">
             {[
-              { name: 'K8s Cluster (US-East)', status: 'Healthy', latency: '12ms', color: 'bg-green-500' },
-              { name: 'pgvector Database', status: 'Healthy', latency: '4ms', color: 'bg-green-500' },
-              { name: 'Redis L2 Caching', status: 'Healthy', latency: '1ms', color: 'bg-green-500' },
-              { name: 'Stripe API Gateway', status: 'Operational', latency: '140ms', color: 'bg-green-500' },
-              { name: 'Docker Code Interpreter', status: 'Active (12 pods)', latency: '85ms', color: 'bg-purple-500' },
+              { name: 'K8s Cluster (US-East)', status: 'Healthy', latency: '12ms', color: 'bg-zapporaLight' },
+              { name: 'pgvector Database', status: 'Healthy', latency: '4ms', color: 'bg-zapporaLight' },
+              { name: 'Redis L2 Caching', status: 'Healthy', latency: '1ms', color: 'bg-zapporaLight' },
+              { name: 'Stripe API Gateway', status: 'Operational', latency: '140ms', color: 'bg-zappora' },
+              { name: 'Docker Code Interpreter', status: 'Active (12 pods)', latency: '85ms', color: 'bg-zappora' },
             ].map((s, idx) => (
               <div key={idx} className="flex items-center justify-between p-3 bg-slate-950 rounded-lg border border-slate-800 text-xs">
                 <div className="flex items-center space-x-2">
@@ -114,7 +114,7 @@ export default function Dashboard() {
       {/* Recent Activity Table */}
       <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl space-y-4">
         <h3 className="font-bold text-white flex items-center space-x-2">
-          <Clock className="w-5 h-5 text-orange-400" />
+          <Clock className="w-5 h-5 text-zappora" />
           <span>Recent Execution Logs</span>
         </h3>
 
@@ -131,13 +131,13 @@ export default function Dashboard() {
             </thead>
             <tbody className="divide-y divide-slate-800 text-slate-300">
               {recentLogs.map((log) => (
-                <tr key={log.id} className="hover:bg-slate-800/40 transition-colors">
-                  <td className="p-3 text-purple-400">{log.id}</td>
+                <tr key={log.id} className="hover:bg-zapporaLight/20 transition-colors">
+                  <td className="p-3 text-zappora">{log.id}</td>
                   <td className="p-3 text-slate-400">{log.time}</td>
                   <td className="p-3 font-semibold text-slate-200">{log.event}</td>
-                  <td className="p-3 text-green-400">{log.latency}</td>
+                  <td className="p-3 text-zappora">{log.latency}</td>
                   <td className="p-3">
-                    <span className="px-2 py-0.5 rounded bg-green-950 text-green-400 border border-green-800">
+                    <span className="px-2 py-0.5 rounded bg-zapporaDark text-zapporaLight border border-zapporaLight">
                       {log.status}
                     </span>
                   </td>
